@@ -451,48 +451,125 @@
         // waitlist form submit
         const form = document.getElementById("waitlistForm");
         const msg = document.getElementById("formMessage");
-        form.addEventListener("submit", async e => {
+        // form.addEventListener("submit", async e => {
+        //     e.preventDefault();
+        //     msg.classList.remove("hidden");
+        //     submitBtn.disabled = true;
+        //     submitBtn.classList.add("opacity-50");
+        //     submitBtn.classList.add("cursor-not-allowed");
+        //     submitBtn.classList.add("pointer-events-none");
+        //     msg.textContent = "Submitting…";
+        //     try {
+        //         const res = await fetch("https://script.google.com/macros/s/AKfycbyRYMO-zUloeDKTQNAHrAfXY_YAYIvxaIu1uIgw-V1Rwwa6PcGwNwlSs6HPMCVO7cQ8/exec", {
+        //             method: "POST",
+        //             body: new FormData(form)
+        //         });
+        //         messageBox.textContent = "Thank you! You’re on the waitlist 🎉";
+        //         messageBox.textContent = "Thank you! You’re on the waitlist 🎉 Check your inbox!";
+        //         messageBox.classList.remove('hidden');
+        //         messageBox.classList.add('bg-green-500');
+
+        //         setTimeout(() => {
+        //             messageBox.classList.add('hidden');
+        //             msg.textContent = "Thank you! You’re on the waitlist 🎉";
+        //             msg.textContent = "Thank you! You’re on the waitlist 🎉 Check your inbox!";
+        //             form.reset();
+        //         }, 3000);
+
+        //     } catch (err) {
+        //         messageBox.textContent = "Something went wrong try again later.";
+        //         messageBox.classList.remove('hidden');
+        //         messageBox.classList.add('bg-red-500');
+
+        //         setTimeout(() => {
+        //             messageBox.classList.add('hidden');
+        //             form.reset();
+        //         }, 3000);
+
+        //     }
+
+
+        //     submitBtn.classList.remove("opacity-50");
+        //     submitBtn.classList.remove("cursor-not-allowed");
+        //     submitBtn.classList.remove("pointer-events-none");
+        // });
+
+        // Mobile Testimonial Stack Logic
+
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
+
+            // UI: loading state
             msg.classList.remove("hidden");
-            submitBtn.disabled = true;
-            submitBtn.classList.add("opacity-50");
-            submitBtn.classList.add("cursor-not-allowed");
-            submitBtn.classList.add("pointer-events-none");
             msg.textContent = "Submitting…";
+
+            submitBtn.disabled = true;
+            submitBtn.classList.add(
+                "opacity-50",
+                "cursor-not-allowed",
+                "pointer-events-none"
+            );
+
             try {
-                const res = await fetch("https://script.google.com/macros/s/AKfycbyRYMO-zUloeDKTQNAHrAfXY_YAYIvxaIu1uIgw-V1Rwwa6PcGwNwlSs6HPMCVO7cQ8/exec", {
-                    method: "POST",
-                    body: new FormData(form)
-                });
-                messageBox.textContent = "Thank you! You’re on the waitlist 🎉";
-                messageBox.classList.remove('hidden');
-                messageBox.classList.add('bg-green-500');
+                const res = await fetch(
+                    "https://script.google.com/macros/s/AKfycbyRYMO-zUloeDKTQNAHrAfXY_YAYIvxaIu1uIgw-V1Rwwa6PcGwNwlSs6HPMCVO7cQ8/exec",
+                    {
+                        method: "POST",
+                        body: new FormData(form),
+                    }
+                );
+
+                const data = await res.json();
+
+                // Reset message box styles
+                messageBox.classList.remove("bg-green-500", "bg-gray-500", "bg-red-500");
+
+                if (data.status === "success") {
+                    messageBox.textContent =
+                        "🎉 You’re on the waitlist! Check your inbox.";
+                    messageBox.classList.add("bg-green-500");
+                    form.reset();
+                }
+
+                else if (data.status === "duplicate") {
+                    messageBox.textContent =
+                        "😉 You’re already on the waitlist. Check your inbox.";
+                    messageBox.classList.add("bg-gray-500");
+                }
+
+                else {
+                    messageBox.textContent =
+                        "Something went wrong — please try again.";
+                    messageBox.classList.add("bg-red-500");
+                }
+
+                messageBox.classList.remove("hidden");
 
                 setTimeout(() => {
-                    messageBox.classList.add('hidden');
-                    msg.textContent = "Thank you! You’re on the waitlist 🎉";
-                    form.reset();
+                    messageBox.classList.add("hidden");
                 }, 3000);
 
             } catch (err) {
-                messageBox.textContent = "Something went wrong try again later.";
-                messageBox.classList.remove('hidden');
-                messageBox.classList.add('bg-red-500');
+                messageBox.textContent =
+                    "Network error — please try again later.";
+                messageBox.classList.remove("hidden");
+                messageBox.classList.add("bg-red-500");
 
                 setTimeout(() => {
-                    messageBox.classList.add('hidden');
-                    form.reset();
+                    messageBox.classList.add("hidden");
                 }, 3000);
-
             }
 
-
-            submitBtn.classList.remove("opacity-50");
-            submitBtn.classList.remove("cursor-not-allowed");
-            submitBtn.classList.remove("pointer-events-none");
+            // UI: restore button
+            submitBtn.disabled = false;
+            submitBtn.classList.remove(
+                "opacity-50",
+                "cursor-not-allowed",
+                "pointer-events-none"
+            );
         });
 
-        // Mobile Testimonial Stack Logic
+
         const testimonialCards = document.querySelectorAll('.testimonial-card');
         const testimonialContainer = document.getElementById('testimonials-container');
         let currentCardIndex = 0;
