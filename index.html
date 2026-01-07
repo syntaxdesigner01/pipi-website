@@ -31,14 +31,19 @@
 
     <header class="fixed top-0 left-0 w-full z-50">
 
-        <p class="bg-yellow-300 text-black text-center py-2 font-medium">
-            <marquee behavior="" direction="">
+        <div class="bg-yellow-300 text-black text-center py-2 font-medium ">
+            <div class="flex justify-center items-center gap-2 text-sm md:text-base  ">
+                <span class="font-semibold">🚀 Launching in - </span>
+                <span id="countdown"
+                    class="bg-black text-green-400 px-3 py-1 rounded font-mono font-bold tracking-widest border border-gray-800 shadow-inner min-w-[180px]">Loading...</span>
+                <span class="hidden sm:inline">-</span>
+                <span class="hidden md:flex ">Join the waitlist! <a href="#waitlist"
+                        class="underline font-bold absolute right-4">Sign Up
+                        Here</a> 🚀</span>
+            </div>
+        </div>
 
-                🚀 Pipi Tabs is launching soon! Join the
-                waitlist
-                now to be the first to try it out. <a href="#waitlist" class="underline font-bold">Sign Up Here</a> 🚀
-            </marquee>
-        </p>
+
         <nav
             class=" w-full backdrop-blur-xl z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
             <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
@@ -58,6 +63,9 @@
                 </div>
             </div>
         </nav>
+
+
+
 
     </header>
 
@@ -320,9 +328,11 @@
                 <input type="tel" name="phone" placeholder="Your phone number" required
                     class="w-full border border-gray-300 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm dark:text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-colors" />
                 <button type="submit"
-                    class="w-full bg-black dark:bg-white dark:text-black text-white py-3 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition"
-                    id="submitBtn">Join
-                    Waitlist</button>
+                    class="w-full bg-black dark:bg-white dark:text-black text-white py-3 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition flex items-center justify-center gap-2"
+                    id="submitBtn">
+                    <span>Join Waitlist</span>
+                    <i id="btnSpinner" class="fa-solid fa-spinner fa-spin hidden"></i>
+                </button>
             </form>
             <p id="formMessage" class="mt-4 text-sm text-gray-600 hidden">Submitting…</p>
         </div>
@@ -331,7 +341,7 @@
 
     <!-- modal -->
     <section id="message"
-        class="text-center text-white p-4 rounded-md fixed top-[20vh] hidden right-0 -translate-x-4 z-40 shadow-md border border-slate-200 capitalize  font-semibold">
+        class="text-center text-white p-4 rounded-md fixed top-[20vh] hidden right-0 -translate-x-4 z-50 shadow-md border border-slate-200 capitalize  font-semibold">
 
     </section>
 
@@ -350,6 +360,7 @@
 
     <!-- SCRIPT -->
     <script src="./script.js"></script>
+
 </body>
 
 

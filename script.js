@@ -3,6 +3,7 @@ const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
 const messageBox = document.getElementById('message');
 const submitBtn = document.getElementById('submitBtn');
+const spinner = document.getElementById('btnSpinner');
 
 // Check local storage or system preference
 if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -47,12 +48,36 @@ const form = document.getElementById("waitlistForm");
 const msg = document.getElementById("formMessage");
 
 if (form && msg && submitBtn && messageBox) {
+    // Check if already joined
+    if (localStorage.getItem('pipi_waitlist_joined') === 'true') {
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(input => input.disabled = true);
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "<span>Joined! 🚀</span>";
+        submitBtn.classList.add("opacity-50", "cursor-not-allowed");
+    }
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
+        // Email Validation
+        const email = form.email.value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+            messageBox.textContent = "Please enter a valid email address.";
+            messageBox.classList.remove("bg-green-500", "bg-gray-500", "hidden");
+            messageBox.classList.add("bg-red-500", "z-50");
+            setTimeout(() => {
+                messageBox.classList.add("hidden");
+            }, 3000);
+            return;
+        }
 
         // UI: loading state
         msg.classList.remove("hidden");
         msg.textContent = "Submitting…";
+        if (spinner) spinner.classList.remove('hidden');
 
         submitBtn.disabled = true;
         submitBtn.classList.add(
@@ -80,18 +105,23 @@ if (form && msg && submitBtn && messageBox) {
                     "🎉 You’re on the waitlist! Check your inbox.";
                 messageBox.classList.add("bg-green-500");
                 form.reset();
+                msg.classList.add("hidden")
+                localStorage.setItem('pipi_waitlist_joined', 'true');
             }
 
             else if (data.status === "duplicate") {
                 messageBox.textContent =
                     "😉 You’re already on the waitlist. Check your inbox.";
                 messageBox.classList.add("bg-gray-500");
+                localStorage.setItem('pipi_waitlist_joined', 'true');
+                msg.classList.add("hidden")
             }
 
             else {
                 messageBox.textContent =
                     "Something went wrong — please try again.";
                 messageBox.classList.add("bg-red-500");
+                msg.classList.add("hidden")
             }
 
             messageBox.classList.remove("hidden");
@@ -105,19 +135,27 @@ if (form && msg && submitBtn && messageBox) {
                 "Network error — please try again later.";
             messageBox.classList.remove("hidden");
             messageBox.classList.add("bg-red-500");
+            msg.classList.add("hidden")
 
             setTimeout(() => {
                 messageBox.classList.add("hidden");
             }, 3000);
         }
 
-        // UI: restore button
-        submitBtn.disabled = false;
-        submitBtn.classList.remove(
-            "opacity-50",
-            "cursor-not-allowed",
-            "pointer-events-none"
-        );
+        // UI: restore button if not joined
+        if (localStorage.getItem('pipi_waitlist_joined') === 'true') {
+            submitBtn.innerHTML = "<span>Joined! 🚀</span>";
+            const inputs = form.querySelectorAll('input');
+            inputs.forEach(input => input.disabled = true);
+        } else {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove(
+                "opacity-50",
+                "cursor-not-allowed",
+                "pointer-events-none"
+            );
+        }
+        if (spinner) spinner.classList.add('hidden');
     });
 }
 
@@ -196,3 +234,41 @@ if (backToTopBtn) {
         });
     });
 }
+
+
+
+
+
+// Countdown Timer Logic
+
+const countdownElement = document.getElementById('countdown');
+
+// Target next Saturday at 00:00:00 (Friday Midnight)
+const now = new Date();
+const targetDate = new Date();
+
+// 6 is Saturday
+const dayOfWeek = 6;
+const daysUntilSaturday = (dayOfWeek + 7 - now.getDay()) % 7;
+
+targetDate.setDate(now.getDate() + daysUntilSaturday);
+targetDate.setHours(0, 0, 0, 0);
+
+// If target is in the past, move to next week
+if (targetDate <= now) {
+    targetDate.setDate(targetDate.getDate() + 7);
+}
+
+setInterval(() => {
+    const distance = targetDate.getTime() - new Date().getTime();
+    if (distance < 0) {
+        countdownElement.innerHTML = "LIVE NOW!";
+        return;
+    }
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
+    const pad = (n) => n.toString().padStart(2, '0');
+    countdownElement.innerHTML = `${d}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+}, 1000);
