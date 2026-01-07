@@ -16,120 +16,17 @@
     <link rel="icon" type="image/png" href="./favicon.ico" />
 
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'great-vibes': ['"Great Vibes"', 'cursive'],
-                    },
-                    colors: {
-                        tabBg: '#FFFD8F',
-                        primary: '#043915',
-                        secondary: '#4c763b'
-                    },
-                }
-            }
-        }
-    </script>
+    <script src="./tailwindConfig.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="./style.css" />
 
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .fade-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .bg-abstract {
-            position: relative;
-        }
-
-        .bg-abstract::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            background-image:
-                linear-gradient(to right, rgba(0, 0, 0, 0.07) 1.2px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.07) 1.2px, transparent 1px),
-                linear-gradient(to right, rgba(0, 0, 0, 0.03) 1.2px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1.2px, transparent 1px);
-            background-size: 64px 56px, 64px 56px, 16px 14px, 16px 14px;
-            mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
-            background-position-y: var(--bg-y, 0px);
-        }
-
-        .dark .bg-abstract::before {
-            background-image:
-                linear-gradient(to right, rgba(255, 255, 255, 0.07) 1.2px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.07) 1.2px, transparent 1px),
-                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1.2px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1.2px, transparent 1px);
-        }
-
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            /* IE and Edge */
-            scrollbar-width: none;
-            /* Firefox */
-        }
-
-        @keyframes ripple-glow {
-            0% {
-                box-shadow: 0 0 0 0 rgba(76, 118, 59, 0.7), 0 0 15px #4c763b;
-            }
-
-            70% {
-                box-shadow: 0 0 0 20px rgba(76, 118, 59, 0), 0 0 15px #4c763b;
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(76, 118, 59, 0), 0 0 15px #4c763b;
-            }
-        }
-
-        .animate-ripple-glow {
-            animation: ripple-glow 2s infinite;
-        }
-
-        @keyframes icon-ripple {
-            0% {
-                box-shadow: 0 0 0 0 rgba(156, 163, 175, 0.6);
-            }
-
-            100% {
-                box-shadow: 0 0 0 8px rgba(156, 163, 175, 0);
-            }
-        }
-
-        .animate-icon-ripple {
-            animation: icon-ripple 3s infinite;
-        }
-    </style>
 </head>
 
-<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans transition-colors duration-300">
+<body
+    class="bg-gradient-to-br from-indigo-50 via-white to-cyan-100 dark:from-gray-900 dark:via-gray-800 dark:to-black bg-fixed text-gray-800 dark:text-gray-100 font-sans transition-colors duration-300 animate-gradient">
+
     <!-- NAVBAR -->
 
     <header class="fixed top-0 left-0 w-full z-50">
@@ -143,7 +40,7 @@
             </marquee>
         </p>
         <nav
-            class="   bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+            class=" w-full backdrop-blur-xl z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
             <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
                 <h1 class="font-great-vibes text-3xl dark:text-white text-3xl font-bold text-primary">Pipi Tabs</h1>
                 <div class="flex items-center gap-4">
@@ -170,8 +67,8 @@
     <section
         class="min-h-screen md:relative top-40 md:mb-40  mt-20 md:mt-0 flex flex-col justify-center items-center text-center px-6">
         <div class="fade-up ">
-            <section class="">
-                <section class="z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg rounded-xl p-4">
+            <section class="w-full">
+                <section class="z-50  backdrop-blur-lg rounded-xl p-4 w-full">
                     <h2 class="text-3xl md:text-5xl lg:text-6xl font-semibold mb-6">Never forget a tab again.
                     </h2>
                     <p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto mb-10">
@@ -180,7 +77,7 @@
                         into a structured workflow with just a few clicks.
                     </p>
                     <a href="#waitlist"
-                        class="bg-black text-white px-6 py-3 group rounded-md   text-md hover:text-secondary font-bold hover:bg-tabBg transition dark:hover:bg-tabBg">Join
+                        class="bg-black text-white px-6 py-3 group rounded-md  px-40  text-md hover:text-secondary font-bold hover:bg-tabBg transition dark:hover:bg-black dark:bg-tabBg dark:text-black dark:hover:text-white ">Join
                         Waitlist <i
                             class="fa-solid fa-arrow-right -rotate-[50deg] transition-transform group-hover:translate-x-2 group-hover:rotate-[0deg]"></i></a>
                 </section>
@@ -200,7 +97,7 @@
                 <h3 class="text-3xl font-semibold text-center mb-12 fade-up">✨ Features</h3>
                 <div class="grid md:grid-cols-3 gap-10 text-center">
                     <div
-                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center">
+                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center glass-card">
                         <div
                             class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-xl mb-4 text-gray-800 dark:text-white animate-icon-ripple">
                             <i class="fa-solid fa-clock"></i>
@@ -208,7 +105,7 @@
                         <p class="font-medium">Set reminders for any URL</p>
                     </div>
                     <div
-                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center">
+                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center glass-card">
                         <div
                             class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-xl mb-4 text-gray-800 dark:text-white animate-icon-ripple">
                             <i class="fa-solid fa-bell"></i>
@@ -216,7 +113,7 @@
                         <p class="font-medium">Receive notifications instantly</p>
                     </div>
                     <div
-                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center">
+                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center glass-card">
                         <div
                             class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-xl mb-4 text-gray-800 dark:text-white animate-icon-ripple">
                             <i class="fa-solid fa-music"></i>
@@ -224,7 +121,7 @@
                         <p class="font-medium">Alarm sound playback</p>
                     </div>
                     <div
-                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center">
+                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center glass-card">
                         <div
                             class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-xl mb-4 text-gray-800 dark:text-white animate-icon-ripple">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -232,7 +129,7 @@
                         <p class="font-medium">Bookmark Tabs</p>
                     </div>
                     <div
-                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center">
+                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center glass-card">
                         <div
                             class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-xl mb-4 text-gray-800 dark:text-white animate-icon-ripple">
                             <i class="fa-solid fa-database"></i>
@@ -240,7 +137,7 @@
                         <p class="font-medium">Auto Sync of Data</p>
                     </div>
                     <div
-                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center">
+                        class="fade-up bg-black/60 backdrop-blur-lg text-white dark:bg-gray-800/60 p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition flex flex-col items-center glass-card">
                         <div
                             class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-xl mb-4 text-gray-800 dark:text-white animate-icon-ripple">
                             <i class="fa-solid fa-bolt"></i>
@@ -255,7 +152,7 @@
     </section>
     <!-- HOW IT WORKS -->
     <section id="how"
-        class="py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 transition-colors duration-300 md:relative top-40">
+        class="py-24 bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm border-t border-gray-100 dark:border-gray-800 transition-colors duration-300 md:relative top-40">
         <div class="max-w-6xl mx-auto px-6 fade-up text-center">
             <h3 class="text-3xl font-semibold mb-8">🚀 How It Works</h3>
             <div class="relative max-w-5xl mx-auto mt-12">
@@ -271,7 +168,7 @@
                             class="hidden md:block absolute top-1/2 left-full w-[20%] h-0.5 bg-gray-200 dark:bg-gray-700 -translate-y-1/2">
                         </div>
                         <div
-                            class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                            class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-md p-6 rounded-xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition glass-card">
                             <h4 class="text-lg font-semibold mb-2 dark:text-white">Set Reminder</h4>
                             <p class="text-gray-600 dark:text-gray-400">Pick a date & time for your reminder.</p>
                         </div>
@@ -307,7 +204,7 @@
                             class="hidden md:block absolute top-1/2 right-full w-[20%] h-0.5 bg-gray-200 dark:bg-gray-700 -translate-y-1/2">
                         </div>
                         <div
-                            class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                            class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-md p-6 rounded-xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition glass-card">
                             <h4 class="text-lg font-semibold mb-2 dark:text-white">Smart Scheduling</h4>
                             <p class="text-gray-600 dark:text-gray-400">Pipi schedules it using
                                 <code>chrome.alarms</code>.
@@ -325,7 +222,7 @@
                             class="hidden md:block absolute top-1/2 left-full w-[20%] h-0.5 bg-gray-200 dark:bg-gray-700 -translate-y-1/2">
                         </div>
                         <div
-                            class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                            class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-md p-6 rounded-xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition glass-card">
                             <h4 class="text-lg font-semibold mb-2 dark:text-white">Instant Notification</h4>
                             <p class="text-gray-600 dark:text-gray-400">When time’s up you get notified & your tab
                                 reopens
@@ -357,7 +254,7 @@
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 no-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
                 <!-- Card 1 -->
                 <div
-                    class="snap-center shrink-0 w-[70vw] md:w-96 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                    class="snap-center shrink-0 w-[70vw] md:w-96 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition glass-card">
                     <div class="flex items-center gap-4 mb-4">
                         <div
                             class="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-500 dark:text-gray-300">
@@ -374,7 +271,7 @@
 
                 <!-- Card 2 -->
                 <div
-                    class="snap-center shrink-0 w-[70vw] md:w-96 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                    class="snap-center shrink-0 w-[70vw] md:w-96 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition glass-card">
                     <div class="flex items-center gap-4 mb-4">
                         <div
                             class="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-500 dark:text-gray-300">
@@ -391,7 +288,7 @@
 
                 <!-- Card 3 -->
                 <div
-                    class="snap-center shrink-0 w-[70vw] md:w-96 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition">
+                    class="snap-center shrink-0 w-[70vw] md:w-96 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md p-6 rounded-2xl shadow-sm border border-white/20 dark:border-gray-700/50 hover:shadow-md transition glass-card">
                     <div class="flex items-center gap-4 mb-4">
                         <div
                             class="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-500 dark:text-gray-300">
@@ -417,11 +314,11 @@
             <p class="text-gray-500 dark:text-gray-400 mb-8">Be the first to try Pipi Tabs when it launches.</p>
             <form id="waitlistForm" class="space-y-4">
                 <input type="text" name="name" placeholder="Your name" required
-                    class="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-colors" />
+                    class="w-full border border-gray-300 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm dark:text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-colors" />
                 <input type="email" name="email" placeholder="Your email" required
-                    class="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-colors" />
+                    class="w-full border border-gray-300 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm dark:text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-colors" />
                 <input type="tel" name="phone" placeholder="Your phone number" required
-                    class="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-colors" />
+                    class="w-full border border-gray-300 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm dark:text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-colors" />
                 <button type="submit"
                     class="w-full bg-black dark:bg-white dark:text-black text-white py-3 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition"
                     id="submitBtn">Join
@@ -452,242 +349,9 @@
     </footer>
 
     <!-- SCRIPT -->
-    <script>
-        // Theme Toggle Logic
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        const messageBox = document.getElementById('message');
-        const submitBtn = document.getElementById('submitBtn');
-
-        // Check local storage or system preference
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        } else {
-            html.classList.remove('dark');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        // Parallax effect for features background
-        window.addEventListener('scroll', () => {
-            const features = document.getElementById('features');
-            if (features) {
-                const scrolled = window.scrollY;
-                features.style.setProperty('--bg-y', `${scrolled * 0.2}px`);
-            }
-        });
-
-        // fade-in observer
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) e.target.classList.add("visible");
-            });
-        }, { threshold: 0.2 });
-        document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
-
-        // waitlist form submit
-        const form = document.getElementById("waitlistForm");
-        const msg = document.getElementById("formMessage");
-        // form.addEventListener("submit", async e => {
-        //     e.preventDefault();
-        //     msg.classList.remove("hidden");
-        //     submitBtn.disabled = true;
-        //     submitBtn.classList.add("opacity-50");
-        //     submitBtn.classList.add("cursor-not-allowed");
-        //     submitBtn.classList.add("pointer-events-none");
-        //     msg.textContent = "Submitting…";
-        //     try {
-        //         const res = await fetch("https://script.google.com/macros/s/AKfycbyRYMO-zUloeDKTQNAHrAfXY_YAYIvxaIu1uIgw-V1Rwwa6PcGwNwlSs6HPMCVO7cQ8/exec", {
-        //             method: "POST",
-        //             body: new FormData(form)
-        //         });
-        //         messageBox.textContent = "Thank you! You’re on the waitlist 🎉";
-        //         messageBox.textContent = "Thank you! You’re on the waitlist 🎉 Check your inbox!";
-        //         messageBox.classList.remove('hidden');
-        //         messageBox.classList.add('bg-green-500');
-
-        //         setTimeout(() => {
-        //             messageBox.classList.add('hidden');
-        //             msg.textContent = "Thank you! You’re on the waitlist 🎉";
-        //             msg.textContent = "Thank you! You’re on the waitlist 🎉 Check your inbox!";
-        //             form.reset();
-        //         }, 3000);
-
-        //     } catch (err) {
-        //         messageBox.textContent = "Something went wrong try again later.";
-        //         messageBox.classList.remove('hidden');
-        //         messageBox.classList.add('bg-red-500');
-
-        //         setTimeout(() => {
-        //             messageBox.classList.add('hidden');
-        //             form.reset();
-        //         }, 3000);
-
-        //     }
-
-
-        //     submitBtn.classList.remove("opacity-50");
-        //     submitBtn.classList.remove("cursor-not-allowed");
-        //     submitBtn.classList.remove("pointer-events-none");
-        // });
-
-        // Mobile Testimonial Stack Logic
-
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            // UI: loading state
-            msg.classList.remove("hidden");
-            msg.textContent = "Submitting…";
-
-            submitBtn.disabled = true;
-            submitBtn.classList.add(
-                "opacity-50",
-                "cursor-not-allowed",
-                "pointer-events-none"
-            );
-
-            try {
-                const res = await fetch(
-                    "https://script.google.com/macros/s/AKfycbyRYMO-zUloeDKTQNAHrAfXY_YAYIvxaIu1uIgw-V1Rwwa6PcGwNwlSs6HPMCVO7cQ8/exec",
-                    {
-                        method: "POST",
-                        body: new FormData(form),
-                    }
-                );
-
-                const data = await res.json();
-
-                // Reset message box styles
-                messageBox.classList.remove("bg-green-500", "bg-gray-500", "bg-red-500");
-
-                if (data.status === "success") {
-                    messageBox.textContent =
-                        "🎉 You’re on the waitlist! Check your inbox.";
-                    messageBox.classList.add("bg-green-500");
-                    form.reset();
-                }
-
-                else if (data.status === "duplicate") {
-                    messageBox.textContent =
-                        "😉 You’re already on the waitlist. Check your inbox.";
-                    messageBox.classList.add("bg-gray-500");
-                }
-
-                else {
-                    messageBox.textContent =
-                        "Something went wrong — please try again.";
-                    messageBox.classList.add("bg-red-500");
-                }
-
-                messageBox.classList.remove("hidden");
-
-                setTimeout(() => {
-                    messageBox.classList.add("hidden");
-                }, 3000);
-
-            } catch (err) {
-                messageBox.textContent =
-                    "Network error — please try again later.";
-                messageBox.classList.remove("hidden");
-                messageBox.classList.add("bg-red-500");
-
-                setTimeout(() => {
-                    messageBox.classList.add("hidden");
-                }, 3000);
-            }
-
-            // UI: restore button
-            submitBtn.disabled = false;
-            submitBtn.classList.remove(
-                "opacity-50",
-                "cursor-not-allowed",
-                "pointer-events-none"
-            );
-        });
-
-
-        const testimonialCards = document.querySelectorAll('.testimonial-card');
-        const testimonialContainer = document.getElementById('testimonials-container');
-        let currentCardIndex = 0;
-        let touchStartX = 0;
-
-        function updateTestimonialStack() {
-            if (window.innerWidth >= 768) {
-                testimonialCards.forEach(card => {
-                    card.style.transform = '';
-                    card.style.opacity = '';
-                    card.style.zIndex = '';
-                });
-                return;
-            }
-
-            testimonialCards.forEach((card, index) => {
-                const i = (index - currentCardIndex + testimonialCards.length) % testimonialCards.length;
-
-                card.style.zIndex = testimonialCards.length - i;
-
-                if (i === 0) {
-                    // Top card
-                    card.style.transform = 'translateY(0) scale(1) rotate(0deg)';
-                    card.style.opacity = '1';
-                } else if (i === 1) {
-                    // Next card (10% visible below)
-                    card.style.transform = 'translateY(10%) scale(0.95) rotate(-2deg)';
-                    card.style.opacity = '1';
-                } else {
-                    // Others hidden
-                    card.style.transform = 'translateY(20%) scale(0.9) rotate(-4deg)';
-                    card.style.opacity = '0';
-                }
-            });
-        }
-
-        if (testimonialContainer) {
-            testimonialContainer.addEventListener('touchstart', e => {
-                touchStartX = e.touches[0].clientX;
-            }, { passive: true });
-
-            testimonialContainer.addEventListener('touchend', e => {
-                const touchEndX = e.changedTouches[0].clientX;
-                if (Math.abs(touchStartX - touchEndX) > 50) {
-                    // Swipe Left or Right -> Next card
-                    currentCardIndex = (currentCardIndex + 1) % testimonialCards.length;
-                    updateTestimonialStack();
-                }
-            }, { passive: true });
-        }
-
-        window.addEventListener('resize', updateTestimonialStack);
-        // Initial call
-        updateTestimonialStack();
-
-        // Back to Top Logic
-        const backToTopBtn = document.getElementById('backToTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                backToTopBtn.classList.remove('opacity-0', 'translate-y-10');
-            } else {
-                backToTopBtn.classList.add('opacity-0', 'translate-y-10');
-            }
-        });
-
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    </script>
+    <script src="./script.js"></script>
 </body>
+
+
 
 </html>
